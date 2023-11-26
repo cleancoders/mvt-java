@@ -1,0 +1,17 @@
+#!/bin/sh
+
+PLUGIN=tmp/protoc-gen-grpc-java
+OUT_DIR=src
+PROTO_DIR=resources
+
+mkdir -p $OUT_DIR
+
+if [ ! -f $PLUGIN ]; then
+  echo "Installing java plugin in ./tmp"
+  mkdir -p tmp
+  curl https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-java/1.59.0/protoc-gen-grpc-java-1.59.0-osx-aarch_64.exe --output $PLUGIN
+  chmod 755 $PLUGIN
+#  xattr -d com.apple.quarantine $PLUGIN
+fi
+
+protoc --plugin=$PLUGIN --java_out=$OUT_DIR --grpc-java_out=$OUT_DIR --proto_path=$PROTO_DIR "vector_tile.proto"
