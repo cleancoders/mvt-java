@@ -5,6 +5,10 @@ This library contains the Java classes for Mapbox Vector Tile protobufs.
 ## Build
 
 ```shell
-bin/proto-to-java
+# generate Java code from proto file
+bin/proto-to-java  
+
+# build and install library locally  
+mvn install 
 ```
 
